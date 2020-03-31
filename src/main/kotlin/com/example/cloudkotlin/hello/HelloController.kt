@@ -1,4 +1,4 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.hello
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody

@@ -1,5 +1,6 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.greeting
 
+import com.example.cloudkotlin.CloudKotlinApplication
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate

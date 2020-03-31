@@ -1,5 +1,7 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.greeting
 
+import com.example.cloudkotlin.greeting.GreetingController
+import com.example.cloudkotlin.greeting.GreetingService
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test

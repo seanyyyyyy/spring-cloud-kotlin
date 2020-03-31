@@ -1,4 +1,4 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.greeting
 
 import org.springframework.stereotype.Service
 

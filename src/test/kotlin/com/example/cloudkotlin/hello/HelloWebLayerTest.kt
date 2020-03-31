@@ -1,5 +1,6 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.hello
 
+import com.example.cloudkotlin.hello.HelloController
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
 @WebMvcTest(HelloController::class)
-class WebLayerTest {
+class HelloWebLayerTest {
 
     @Autowired
     lateinit var mockMvc: MockMvc

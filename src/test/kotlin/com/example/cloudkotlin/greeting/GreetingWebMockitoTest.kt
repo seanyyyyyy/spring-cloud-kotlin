@@ -1,5 +1,7 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.greeting
 
+import com.example.cloudkotlin.greeting.GreetingController
+import com.example.cloudkotlin.greeting.GreetingService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest

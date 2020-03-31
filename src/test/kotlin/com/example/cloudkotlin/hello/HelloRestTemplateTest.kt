@@ -1,4 +1,4 @@
-package com.example.cloudkotlin
+package com.example.cloudkotlin.hello
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
