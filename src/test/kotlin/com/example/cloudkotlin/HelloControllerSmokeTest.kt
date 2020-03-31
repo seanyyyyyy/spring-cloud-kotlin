@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class SmokeTest {
+class HelloControllerSmokeTest {
 
     @Autowired
-    lateinit var controller: HomeController
+    lateinit var controller: HelloController
 
     @Test
     fun contexLoads() {

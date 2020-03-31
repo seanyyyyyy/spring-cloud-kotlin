@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.springframework.http.HttpStatus
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class HttpRequestTest{
+class HelloRestTemplateTest{
 
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate

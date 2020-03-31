@@ -8,7 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
-@WebMvcTest(HomeController::class)
+@WebMvcTest(HelloController::class)
 class WebLayerTest {
 
     @Autowired

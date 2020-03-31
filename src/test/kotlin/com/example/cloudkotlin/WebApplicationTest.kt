@@ -12,13 +12,13 @@ import org.springframework.test.web.servlet.get
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class TestingWebApplicationTest {
+class WebApplicationTest {
 
     @Autowired
     lateinit var mockMvc: MockMvc
 
     @Test
-    fun shouldReturnDefaultMessage() {
+    fun shouldReturnHelloMessage() {
         mockMvc.get("/hello") {
             accept(MediaType.APPLICATION_JSON)
         }.andExpect {
@@ -26,6 +26,21 @@ class TestingWebApplicationTest {
             content {
                 contentType(MediaType.APPLICATION_JSON)
                 string(containsString("Hello, world!"))
+            }
+        }.andDo {
+            print()
+        }
+    }
+
+    @Test
+    fun shouldReturnGreetingMessage() {
+        mockMvc.get("/greeting") {
+            accept(MediaType.APPLICATION_JSON)
+        }.andExpect {
+            status { isOk }
+            content {
+                contentType(MediaType.APPLICATION_JSON)
+                string(containsString("Greetings, World"))
             }
         }.andDo {
             print()
