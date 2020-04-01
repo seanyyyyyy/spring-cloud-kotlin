@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.2.6.RELEASE"
-	id("io.spring.dependency-management") version "1.0.9.RELEASE"
+	id("org.springframework.boot") version "2.2.1.RELEASE"
+	id("io.spring.dependency-management") version "1.0.8.RELEASE"
 	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
 	id("org.asciidoctor.convert") version "1.5.8"
-	kotlin("jvm") version "1.3.31"
-	kotlin("plugin.spring") version "1.3.31"
-	//Downgraded to 31, investigate Kotlin Gradle plugin 1.3.71 works with Gradle 4.9 and later.
+	kotlin("jvm") version "1.3.61"
+	kotlin("plugin.spring") version "1.3.61"
+	//Kotlin script generates when these downgraded to 1.3.31, investigating...
 }
 
 group = "com.example"
@@ -24,6 +24,7 @@ extra["springCloudVersion"] = "Hoxton.SR3"
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	//implementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -36,6 +37,7 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
 	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
+	//testImplementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable")
 }
 
 dependencyManagement {
