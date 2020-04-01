@@ -2,11 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("org.springframework.boot") version "2.2.6.RELEASE"
-	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
+	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
 	id("org.asciidoctor.convert") version "1.5.8"
-	kotlin("jvm") version "1.3.71"
-	kotlin("plugin.spring") version "1.3.71"
+	kotlin("jvm") version "1.3.31"
+	kotlin("plugin.spring") version "1.3.31"
+	//Downgraded to 31, investigate Kotlin Gradle plugin 1.3.71 works with Gradle 4.9 and later.
 }
 
 group = "com.example"
@@ -28,7 +29,7 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-		exclude(module = "junit")
+		exclude(group = "junit", module = "junit")
 	}
 	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-verifier")
 	testImplementation("org.springframework.cloud:spring-cloud-contract-spec-kotlin") //:2.2.2.RELEASE
@@ -47,6 +48,7 @@ contracts {
 	packageWithBaseClasses.set("com.example.cloudkotlin")
 	baseClassMappings {
 		baseClassMapping(".*hello.*", "com.example.cloudkotlin.HelloBase")
+		baseClassMapping(".*greeting.*", "com.example.cloudkotlin.GreetingBase")
 	}
 }
 

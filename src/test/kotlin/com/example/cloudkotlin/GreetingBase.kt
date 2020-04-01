@@ -1,6 +1,6 @@
 package com.example.cloudkotlin
 
-import com.example.cloudkotlin.hello.HelloController
+import com.example.cloudkotlin.greeting.GreetingController
 import io.restassured.module.mockmvc.RestAssuredMockMvc
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.hamcrest.CoreMatchers.containsString
@@ -10,24 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class HelloBase {
+class GreetingBase {
 
     @Autowired
-    lateinit var helloController: HelloController
+    lateinit var greetingController: GreetingController
 
     @BeforeEach
     fun initialiseRestAssuredMockMvcStandalone() {
-        RestAssuredMockMvc.standaloneSetup(helloController)
+        RestAssuredMockMvc.standaloneSetup(greetingController)
     }
 
     @Test
     fun checkRestController() {
         given()
         .`when`()
-            .get("/hello")
+            .get("/greeting")
         .then()
             .log().ifValidationFails()
             .statusCode(200)
-            .body(containsString("Hello, world!"))
+            .body(containsString("Greetings, World"))
     }
 }
