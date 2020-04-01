@@ -1,6 +1,5 @@
 package com.example.cloudkotlin.hello
 
-import com.example.cloudkotlin.hello.HelloController
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +13,6 @@ class HelloControllerSmokeTest {
 
     @Test
     fun contexLoads() {
-        //assertThat(controller).isNotNull
         assertNotNull(controller)
     }
 

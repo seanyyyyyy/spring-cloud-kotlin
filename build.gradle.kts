@@ -1,7 +1,9 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("org.springframework.boot") version "2.2.6.RELEASE"
+	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	id("org.asciidoctor.convert") version "1.5.8"
 	kotlin("jvm") version "1.3.71"
@@ -29,9 +31,10 @@ dependencies {
 		exclude(module = "junit")
 	}
 	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-verifier")
+	testImplementation("org.springframework.cloud:spring-cloud-contract-spec-kotlin") //:2.2.2.RELEASE
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-	testImplementation("io.mockk:mockk:1.9.3")
+	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
+	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
 }
 
 dependencyManagement {
@@ -60,4 +63,8 @@ tasks.test {
 tasks.asciidoctor {
 	inputs.dir(snippetsDir)
 	dependsOn(tasks.test)
+}
+
+contracts {
+	packageWithBaseClasses.set("com.example.cloudkotlin")
 }

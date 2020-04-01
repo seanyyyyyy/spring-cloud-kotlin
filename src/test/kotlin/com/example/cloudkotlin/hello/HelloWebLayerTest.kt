@@ -1,6 +1,5 @@
 package com.example.cloudkotlin.hello
 
-import com.example.cloudkotlin.hello.HelloController
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
