@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -22,10 +21,11 @@ extra["snippetsDir"] = file("build/generated-snippets")
 extra["springCloudVersion"] = "Hoxton.SR3"
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 		exclude(module = "junit")
@@ -40,6 +40,13 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+	}
+}
+
+contracts {
+	packageWithBaseClasses.set("com.example.cloudkotlin")
+	baseClassMappings {
+		baseClassMapping(".*hello.*", "com.example.cloudkotlin.HelloBase")
 	}
 }
 
@@ -63,8 +70,4 @@ tasks.test {
 tasks.asciidoctor {
 	inputs.dir(snippetsDir)
 	dependsOn(tasks.test)
-}
-
-contracts {
-	packageWithBaseClasses.set("com.example.cloudkotlin")
 }
