@@ -1,4 +1,4 @@
-package greeting
+package hello
 
 import org.springframework.cloud.contract.spec.ContractDsl.Companion.contract
 import org.springframework.cloud.contract.spec.withQueryParameters
