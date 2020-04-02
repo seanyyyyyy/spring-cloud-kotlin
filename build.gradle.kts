@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.2.1.RELEASE"
-	id("io.spring.dependency-management") version "1.0.8.RELEASE"
-	id("org.springframework.cloud.contract") version "2.2.2.RELEASE"
+	id("org.springframework.boot")
+	id("io.spring.dependency-management")
+	id("spring-cloud-contract")
 	id("org.asciidoctor.convert") version "1.5.8"
 	kotlin("jvm") version "1.3.61"
 	kotlin("plugin.spring") version "1.3.61"
@@ -24,7 +24,6 @@ extra["springCloudVersion"] = "Hoxton.SR3"
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	//implementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -37,7 +36,6 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
 	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
-	//testImplementation("org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable")
 }
 
 dependencyManagement {
@@ -49,19 +47,8 @@ dependencyManagement {
 contracts {
 	packageWithBaseClasses.set("com.example.cloudkotlin")
 	baseClassMappings {
-		baseClassMapping(".*hello.*", "com.example.cloudkotlin.HelloBase")
-		baseClassMapping(".*greeting.*", "com.example.cloudkotlin.GreetingBase")
-	}
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		baseClassMapping(".*hello.*", "com.example.cloudkotlin.hello.HelloBase")
+		baseClassMapping(".*greeting.*", "com.example.cloudkotlin.greeting.GreetingBase")
 	}
 }
 
@@ -74,4 +61,15 @@ tasks.test {
 tasks.asciidoctor {
 	inputs.dir(snippetsDir)
 	dependsOn(tasks.test)
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		freeCompilerArgs = listOf("-Xjsr305=strict")
+		jvmTarget = "1.8"
+	}
 }
