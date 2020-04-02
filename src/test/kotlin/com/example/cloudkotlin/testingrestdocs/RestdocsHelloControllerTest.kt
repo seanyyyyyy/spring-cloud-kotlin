@@ -10,6 +10,7 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
@@ -37,7 +38,7 @@ class RestdocsHelloControllerTest {
     }
 
 
-    /* MockMvc Kotlin DSL does not generate snippets for some reason...
+    // MockMvc Kotlin DSL does not generate snippets for some reason
     @Test
     fun shouldReturnDefaultMessageKotlinDSL() {
         mockMvc.get("/hello")
@@ -51,5 +52,4 @@ class RestdocsHelloControllerTest {
             document("home")
         }
     }
-    */
 }
