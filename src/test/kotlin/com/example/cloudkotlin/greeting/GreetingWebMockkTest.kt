@@ -31,7 +31,7 @@ class GreetingWebMockkTest {
 
     @Test
     fun greetingShouldReturnMessageFromServiceMockk() {
-        every { service.greet() } returns "Greetings, Mockk"
+        every { service.greeting() } returns mapOf("message" to "Greetings, Mockk")
 
         mockMvc.get("/greeting") {
 

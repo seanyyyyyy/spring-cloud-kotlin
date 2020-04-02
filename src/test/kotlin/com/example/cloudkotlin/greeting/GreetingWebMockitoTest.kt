@@ -23,11 +23,10 @@ class GreetingWebMockitoTest {
 
     @Test
     fun greetingShouldReturnMessageFromServiceMockito() {
-        Mockito.`when`(mockitoService.greet()).thenReturn("Greetings, Mockito")
+        Mockito.`when`(mockitoService.greeting()).thenReturn(mapOf("message" to "Greetings, Mockito"))
 
-        mockMvc.get("/greeting") {
-
-        }.andExpect{
+        mockMvc.get("/greeting")
+        .andExpect{
             status { isOk }
             content { string(containsString("Greetings, Mockito")) }
         }.andDo {

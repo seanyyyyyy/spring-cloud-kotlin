@@ -12,8 +12,8 @@ class GreetingController(val service: GreetingService) {
     **/
 
     @GetMapping("/greeting")
-    fun helloKotlinService(): String {
-        return service.greet()
+    fun helloKotlinService(): Map<String,String> {
+        return service.greeting()
     }
 
 

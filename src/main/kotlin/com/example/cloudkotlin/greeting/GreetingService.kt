@@ -5,7 +5,13 @@ import org.springframework.stereotype.Service
 @Service
 class GreetingService {
 
-    fun greet(): String {
-        return "Greetings, World"
+    /*
+    fun greeting(): Map<String,Object> {
+        return Collections.singletonMap("message", "Greetings, world!")
+    }
+     */
+
+    fun greeting(): Map<String,String> {
+        return mapOf("message" to "Greetings, World!")
     }
 }
