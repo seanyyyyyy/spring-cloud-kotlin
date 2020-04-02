@@ -1,6 +1,5 @@
 package com.example.cloudkotlin.greeting
 
-import com.example.cloudkotlin.greeting.GreetingController
 import io.restassured.module.mockmvc.RestAssuredMockMvc
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.hamcrest.CoreMatchers.containsString
