@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management")
 	id("spring-cloud-contract")
 	id("org.asciidoctor.convert") version "1.5.9.2"
+	//id("org.asciidoctor.jvm.convert") version "1.5.9.2"
 	kotlin("jvm") version "1.3.61"
 	kotlin("plugin.spring") version "1.3.61"
 	//Kotlin script generates when these downgraded to 1.3.31, investigating...
@@ -18,7 +19,6 @@ repositories {
 	mavenCentral()
 }
 
-
 extra["snippetsDir"] = file("build/generated-snippets")
 extra["springCloudVersion"] = "Hoxton.SR3"
 
@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.asciidoctor:asciidoctorj:1.5.4")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -63,7 +64,13 @@ tasks.test {
 	outputs.dir("build/generated-snippets")
 }
 tasks.asciidoctor {
+	sourceDir = file("src/docs/asciidoc")
 	inputs.dir("build/generated-snippets")
+	attributes(
+			mapOf(
+					"snippets" to file("build/generated-snippets")
+			)
+	)
 	dependsOn(tasks.test)
 }
 
