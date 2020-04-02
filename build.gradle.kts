@@ -4,7 +4,7 @@ plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
 	id("spring-cloud-contract")
-	id("org.asciidoctor.convert") version "1.5.8"
+	id("org.asciidoctor.convert") version "1.5.9.2"
 	kotlin("jvm") version "1.3.61"
 	kotlin("plugin.spring") version "1.3.61"
 	//Kotlin script generates when these downgraded to 1.3.31, investigating...
@@ -17,6 +17,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 repositories {
 	mavenCentral()
 }
+
 
 extra["snippetsDir"] = file("build/generated-snippets")
 extra["springCloudVersion"] = "Hoxton.SR3"
@@ -34,8 +35,12 @@ dependencies {
 	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-verifier")
 	testImplementation("org.springframework.cloud:spring-cloud-contract-spec-kotlin") //:2.2.2.RELEASE
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+	//testImplementation("org.springframework.restdocs:spring-restdocs-restassured") can investigate for integration tests
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
 	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
+	testImplementation("io.rest-assured:xml-path:4.2.0")
+
+	asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.6.RELEASE")
 }
 
 dependencyManagement {
@@ -55,11 +60,10 @@ contracts {
 val snippetsDir by extra { file("build/generated-snippets") }
 
 tasks.test {
-	outputs.dir(snippetsDir)
+	outputs.dir("build/generated-snippets")
 }
-
 tasks.asciidoctor {
-	inputs.dir(snippetsDir)
+	inputs.dir("build/generated-snippets")
 	dependsOn(tasks.test)
 }
 
