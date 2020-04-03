@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.get
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class WebApplicationTest {
+class ApplicationTest {
 
     @Autowired
     lateinit var mockMvc: MockMvc
