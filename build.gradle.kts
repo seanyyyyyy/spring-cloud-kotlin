@@ -32,7 +32,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mustache")
 	//implementation("org.asciidoctor:asciidoctorj:1.5.4")
-
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -40,13 +39,16 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 		exclude(group = "junit", module = "junit")
 	}
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-verifier")
 	testImplementation("org.springframework.cloud:spring-cloud-contract-spec-kotlin") //:2.2.2.RELEASE
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	//testImplementation("org.springframework.restdocs:spring-restdocs-restassured") can investigate for integration tests
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
 	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
+	testImplementation("com.ninja-squad:springmockk:1.1.3")
 	testImplementation("io.rest-assured:xml-path:4.2.0")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
 	asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.6.RELEASE")
 }
