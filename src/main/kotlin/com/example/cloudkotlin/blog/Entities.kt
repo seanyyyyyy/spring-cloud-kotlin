@@ -5,9 +5,9 @@ import javax.persistence.*
 
 @Entity
 class Article(
-        var title: String = "title",
-        var headline: String = "headline",
-        var content: String = "Content",
+        var title: String,
+        var headline: String,
+        var content: String,
         @ManyToOne var author: User,
         var slug: String = title.toSlug(),
         var addedAt: LocalDateTime = LocalDateTime.now(),
