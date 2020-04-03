@@ -1,6 +1,5 @@
-package com.example.cloudkotlin.hello
+package com.example.cloudkotlin.blog
 
-import com.example.cloudkotlin.CloudKotlinApplication
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -11,10 +10,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.http.HttpStatus
 
-@SpringBootTest(
-        classes = [CloudKotlinApplication::class],
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class HelloRestTemplateTest(@Autowired var testRestTemplate: TestRestTemplate){
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class IntegrationTests(@Autowired val restTemplate: TestRestTemplate) {
 
     @BeforeAll
     fun setup() {
@@ -22,17 +19,20 @@ class HelloRestTemplateTest(@Autowired var testRestTemplate: TestRestTemplate){
     }
 
     @Test
-    fun `Hello should return default message`() {
-        val result = testRestTemplate
-                .withBasicAuth("user","pass")
-                .getForEntity<String>("/hello")
+    fun `Assert blog page title, content and status code`() {
+        val entity = restTemplate.getForEntity<String>("/")
+        assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(entity.body).contains("<h1>Blog</h1>")
+    }
 
-        assertThat(result.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(result.body).contains("Hello, World")
+    @Test
+    fun `Assert article page title, content and status code`() {
+        println(">> TODO")
     }
 
     @AfterAll
     fun teardown() {
         println(">> Tear down")
     }
+
 }
