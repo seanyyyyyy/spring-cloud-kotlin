@@ -8,6 +8,7 @@ plugins {
 	//id("org.asciidoctor.jvm.convert") version "1.5.9.2"
 	kotlin("jvm") version "1.3.61"
 	kotlin("plugin.spring") version "1.3.61"
+	kotlin("plugin.allopen") version "1.3.61"
 	//Kotlin script generates when these downgraded to 1.3.31, investigating...
 }
 
@@ -61,6 +62,12 @@ contracts {
 		baseClassMapping(".*hello.*", "com.example.cloudkotlin.hello.HelloBase")
 		baseClassMapping(".*greeting.*", "com.example.cloudkotlin.greeting.GreetingBase")
 	}
+}
+
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.Embeddable")
+	annotation("javax.persistence.MappedSuperclass")
 }
 
 val snippetsDir by extra { file("build/generated-snippets") }
