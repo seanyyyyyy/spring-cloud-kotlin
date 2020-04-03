@@ -27,6 +27,6 @@ class HelloBase {
         .then()
             .log().ifValidationFails()
             .statusCode(200)
-            .body(containsString("Hello, world!"))
+            .body(containsString("Hello, World"))
     }
 }

@@ -18,13 +18,13 @@ class ApplicationTest {
 
     @Test
     fun shouldReturnHelloMessage() {
-        mockMvc.get("/hello") {
+        mockMvc.get("/hello?name=Jack") {
             accept(MediaType.APPLICATION_JSON)
         }.andExpect {
             status { isOk }
             content {
                 contentType(MediaType.APPLICATION_JSON)
-                string(containsString("Hello, world!"))
+                string(containsString("Hello, Jack"))
             }
         }.andDo {
             print()

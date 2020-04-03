@@ -1,18 +1,14 @@
 package com.example.cloudkotlin.hello
 
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.concurrent.atomic.AtomicLong
 
 @RestController
 class HelloController {
 
-    @RequestMapping(
-            path = ["/hello"]
-    )
-    @ResponseBody
-    fun greeting():String {
-        return "Hello, world!"
-    }
+    val counter = AtomicLong()
 
+    @GetMapping("/hello")
+    fun hello(@RequestParam(value = "name", defaultValue ="World") name:String)
+    = Greeting(counter.incrementAndGet(),"Hello, $name")
 }

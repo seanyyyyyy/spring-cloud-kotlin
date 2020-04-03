@@ -22,7 +22,7 @@ class HelloWebLayerTest {
             status { isOk }
             content {
                 contentType(MediaType.APPLICATION_JSON)
-                string(containsString("Hello, world!"))
+                string(containsString("Hello, World"))
             }
         }.andDo {
             print()

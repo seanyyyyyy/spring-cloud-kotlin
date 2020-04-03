@@ -21,7 +21,7 @@ class HelloRestTemplateTest(@Autowired var testRestTemplate: TestRestTemplate){
                 .getForEntity<String>("/hello")
 
         assertThat(result.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(result.body).contains("Hello, world!")
+        assertThat(result.body).contains("Hello, World")
     }
 
 }
