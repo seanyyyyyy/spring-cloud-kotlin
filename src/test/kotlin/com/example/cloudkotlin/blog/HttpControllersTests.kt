@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 
 
@@ -46,5 +48,37 @@ class HttpControllersTests (@Autowired val mockMvc: MockMvc) {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("\$.[0].login").value(juergen.login))
                 .andExpect(jsonPath("\$.[1].login").value(smaldini.login))
+    }
+
+    //TODO
+    fun `add user`() {
+
+        val mockResponse = "{\n" +
+                "    \"login\": \"user2\",\n" +
+                "    \"firstname\": \"misus\",\n" +
+                "    \"lastname\": \"woman\",\n" +
+                "    \"description\": \"woman\",\n" +
+                "    \"id\": 5\n" +
+                "}"
+        //every { userRepository.save(newUser) } returns mockResponse
+
+        val body = """
+            {
+            	"login": "user2",
+            	"firstname": "misus",
+            	"lastname": "woman",
+            	"description" : "woman"
+            }
+        """.trimIndent()
+
+        mockMvc.post("/api/user/addUser/") {
+            contentType = MediaType.APPLICATION_JSON
+            content = body
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json("{}") }
+        }
     }
 }
