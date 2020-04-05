@@ -15,7 +15,8 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
@@ -44,13 +45,14 @@ dependencies {
 	testImplementation("org.springframework.cloud:spring-cloud-contract-spec-kotlin") //:2.2.2.RELEASE
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	//testImplementation("org.springframework.restdocs:spring-restdocs-restassured") can investigate for integration tests
+	testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") //:2.2.0
 	testImplementation("io.mockk:mockk:1.9.3") //:1.9.3
 	testImplementation("com.ninja-squad:springmockk:1.1.3")
 	testImplementation("io.rest-assured:xml-path:4.2.0")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
-	asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.6.RELEASE")
+	//asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.6.RELEASE")
 }
 
 dependencyManagement {
@@ -76,14 +78,15 @@ allOpen {
 val snippetsDir by extra { file("build/generated-snippets") }
 
 tasks.test {
-	outputs.dir("build/generated-snippets")
+	outputs.dir(snippetsDir)
 }
+
 tasks.asciidoctor {
 	sourceDir = file("src/docs/asciidoc")
-	inputs.dir("build/generated-snippets")
+	inputs.dir(snippetsDir)
 	attributes(
 			mapOf(
-					"snippets" to file("build/generated-snippets")
+					"snippets" to snippetsDir
 			)
 	)
 	dependsOn(tasks.test)
@@ -96,6 +99,6 @@ tasks.withType<Test> {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		jvmTarget = "11"
 	}
 }
