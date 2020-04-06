@@ -12,6 +12,7 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
@@ -52,19 +53,18 @@ class RestdocsHelloControllerTest {
                 )
     }
 
-    /* MockMvc Kotlin DSL does not generate snippets for some reason
     @Test
     fun shouldReturnDefaultMessageKotlinDSL() {
         mockMvc.get("/hello")
         .andExpect {
             status { isOk }
             content {
-                string(containsString("Hello, world!"))
+                string(containsString("Hello, World"))
             }
         }.andDo {
             print()
-            document("home")
+            handle(document("hello"))
         }
     }
-     */
+
 }
